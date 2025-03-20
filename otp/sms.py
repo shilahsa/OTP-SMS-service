@@ -1,6 +1,6 @@
 import requests
 import json
-API_KEY = "GtEUrpID4Zqxvp1uqQWbXgGKorkoe9h8RSbapWPf4Zk="
+API_KEY = ""
 
 
 def send_sms(receptor, variables, pattern_code):
