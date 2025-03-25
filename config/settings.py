@@ -13,13 +13,19 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 DEVELOPMENT=True
 
+# Allow all hosts for flexibility in testing (not recommended for production)
 ALLOWED_HOSTS = ['*']
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", default='http://localhost').split(",")
+
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", default='http://localhost:3000,http://localhost:8000').split(",")
 CORS_ALLOW_CREDENTIALS = True
 if DEVELOPMENT:
-    CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:3000',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+    ]
 else:
-    CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://127.0.0.1').split(',')
+    CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://yourdomain.com').split(',')
 
 AUTH_USER_MODEL = 'otp.User'
 
