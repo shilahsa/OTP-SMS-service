@@ -11,11 +11,17 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEVELOPMENT=True
 
 ALLOWED_HOSTS = ['*']
-CORS_ALLOWED_ORIGINS = ['*']
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", default='http://localhost').split(",")
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS=['*']
+if DEVELOPMENT:
+    CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
+else:
+    CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://127.0.0.1').split(',')
+
+AUTH_USER_MODEL = 'otp.User'
 
 # Application definition
 INSTALLED_APPS = [
